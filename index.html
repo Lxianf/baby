@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100%;
+            
+            background:url('123.jpg') no-repeat;
+            background-size: 100% ;
+        }
+        .top{
+            width: 100%;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            font-size: 22px;
+            font-family: "华文行楷";
+            color: #fff;
+        }
+        img {
+            width: 60%;
+            overflow: hidden;
+
+        }
+
+        .box {
+            height: 100%;
+            margin: auto;
+            perspective: 800px;
+            /*景深*/
+        }
+
+        .box .pic {
+            position: relative;
+            transform-style: preserve-3d;
+            /*3d环境*/
+            animation: play 10s linear infinite;
+            /*动画名称 执行时间 匀速 无限执行*/
+        }
+
+        .box ul li {
+            list-style: none;
+            position: absolute;
+
+        }
+
+        @keyframes play {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+        #text {
+			margin: 0 auto;
+			height: 140px;
+			color: #fff;
+			font-size: 16px;
+			font-family: "华文行楷";
+			position: absolute;
+			bottom: 0px;
+		}
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <span>时光不老，我们不散</span>
+    </div>
+    <!--end top-->
+    <!--start box-->
+    <div class="box">
+        <div class="pic">
+            <ul>
+                <li>
+                    <img src="images/111.jpg"/>
+                </li>
+                <li>
+                    <img src="images/222.jpg"/>
+                </li>
+                <li>
+                    <img src="images/333.jpg"/>
+                </li>
+                <li>
+                    <img src="images/444.jpg"/>
+                </li>
+                <li>
+                    <img src="images/555.jpg"/>
+                </li>
+                <li>
+                    <img src="images/666.jpg"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--end box-->
+    <!--start text-->
+    <div id="text"></div>
+</body>
+<embed src="music.m4a" hidden="true" />
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="js/snow.js"></script>
+<script>
+    $(".pic ul li").each(function (i) { //遍历
+        var deg = 360 / $(".pic ul li").size(); //size个数
+        //当前的li对象 添加css样式
+        $(this).css({
+            "transform": "rotateY(" + deg * i + "deg) translateZ(100px)"
+        });
+        $.fn.snow({
+            minSize: 8,
+            maxSize: 16,
+            newOn: 2000,
+            flakeColor: "white"
+        });
+    });
+    var i = 0;
+
+    var str = "我最爱的大宝贝：能够遇见你是我最大的幸运，有了你生活变得丰富多彩，有了你，世界变得如此迷人；你是我的世界，我的世界是你，对我来说，不是在最美好的时光遇见了你，而是遇见你后都是最美好的时光。你最爱的大白菜！";
+
+    window.onload = function typing() {
+        //获取div
+        var mydiv = document.getElementById("text");
+        mydiv.innerHTML += str.charAt(i);
+        i++;
+        var id = setTimeout(typing, 100);
+        if (i == str.length) {
+            clearTimeout(id);
+        }
+    }
+    
+</script>
+
+</html>
